@@ -1,0 +1,66 @@
+Category,Company,Website,HQ Location,Approx Employees,Est. Revenue (USD),Key Markets,Primary Solution,Funding/Status
+Your Business,Abuzz,[https://www.abuzzsolutions.com/,Australia](https://www.abuzzsolutions.com/,Australia) / UAE,50-100,Unknown,Global / MENA / APAC,Integrated Kiosks & Wayfinding,Private
+Your Business,Abuzz MENA,[www.abuzzmena.com](https://www.abuzzmena.com),UAE,10-50,Unknown,MENA,Integrated Kiosks & Wayfinding,Private
+Direct Competitor (Kiosk Focus),ViaDirect,www.viadirect.fr,France,50-200,$10M - $25M,Global / EU / MENA,Hardware Kiosks + 3D Wayfinding,Private
+Direct Competitor (Kiosk Focus),Acquire Digital,[https://acquiredigital.com/,UK](https://acquiredigital.com/,UK) / USA,50-100,$5M - $10M,US / UK,Digital Signage + Wayfinding,Private
+Direct Competitor (Kiosk Focus),Express Image,[https://expressimage.com/,USA,50-100,$10M](https://expressimage.com/,USA,50-100,$10M) - $20M,North America,Interactive Directories & Kiosks,Private
+Direct Competitor (Kiosk Focus),Ipads4Everyone (Kiosk Innova),[https://www.kioskinnova.com/,Turkey,200-500,$20M+,EU](https://www.kioskinnova.com/,Turkey,200-500,$20M+,EU) / MENA,Kiosk Hardware & Software,Subsidiary
+Direct Competitor (Kiosk Focus),Redylog,[https://www.redylog.com/,Spain,10-50](https://www.redylog.com/,Spain,10-50),<$5M,Europe,Retail Wayfinding Directories,Private
+Direct Competitor (Kiosk Focus),3d-berlin,[https://3d-berlin.com/en/start/,Germany,50-100,$5M+,Europe,3D](https://3d-berlin.com/en/start/,Germany,50-100,$5M+,Europe,3D) Indoor Navigation,Private
+Direct Competitor (Kiosk Focus),Meridian Kiosks,[https://www.meridiankiosks.com/,USA,50-200,$20M+,North](https://www.meridiankiosks.com/,USA,50-200,$20M+,North) America,Custom Kiosks & Wayfinding Hardware,Private
+Direct Competitor (Kiosk Focus),Olea Kiosks,[https://www.olea.com/,USA,50-100,$5M](https://www.olea.com/,USA,50-100,$5M) - $15M,Global / US,Kiosk Manufacturing & Design,Private
+Direct Competitor (Kiosk Focus),Frank Mayer and Associates,[https://www.frankmayer.com/,USA,50-100,$15M](https://www.frankmayer.com/,USA,50-100,$15M) - $25M,North America,Retail Displays & Kiosks,Private
+Direct Competitor (Kiosk Focus),Image Holders,[https://www.imageholders.com/,UK,11-50,$5M+,Europe](https://www.imageholders.com/,UK,11-50,$5M+,Europe) / US,Tablet Kiosks & Enclosures,Private
+Direct Competitor (Kiosk Focus),Redmon Group,[https://www.redmon.com/,USA,11-50,$2M](https://www.redmon.com/,USA,11-50,$2M) - $5M,US,Transit & Smart City Wayfinding,Private
+Direct Competitor (SaaS Mapping),Mappedin,[www.mappedin.com/,Canada,50-200,$5M](https://www.mappedin.com/,Canada,50-200,$5M) - $15M,Global / US,SaaS Mapping Platform (Web/Mobile),Series A ($10M+)
+Direct Competitor (SaaS Mapping),Point Inside,[https://www.pointinside.com/,USA,50-100,$5M](https://www.pointinside.com/,USA,50-100,$5M) - $10M,North America,Store Maps & Retail Analytics,Private
+Direct Competitor (SaaS Mapping),MazeMap,mazemap.com,Norway,11-50,$5M+,Global / EU,University/Hospital Wayfinding,Acquired (Cisco?)
+Direct Competitor (SaaS Mapping),MapsPeople,[www.mapspeople.com/,Denmark,100-200,$10M+,Global,Google](https://www.mapspeople.com/,Denmark,100-200,$10M+,Global,Google) Maps Integration,Public (Nasdaq First North)
+Direct Competitor (SaaS Mapping),VisioGlobe,[https://visioglobe.com/,France,10-50,$2M](https://visioglobe.com/,France,10-50,$2M) - $5M,Europe / MENA,3D Map Rendering Engine,Private
+Direct Competitor (SaaS Mapping),Mapwize (Atrius),[https://www.mapwize.io/,France](https://www.mapwize.io/,France) (Acq by Acuity),N/A (Integrated),N/A,Global,Indoor Mapping SaaS,Acquired by Acuity Brands
+Direct Competitor (SaaS Mapping),LocusLabs (Atrius),[https://atrius.com/,USA](https://atrius.com/,USA) (Acq by Acuity),N/A (Integrated),N/A,Global / US,Airport Wayfinding,Acquired by Acuity Brands
+Direct Competitor (SaaS Mapping),Woosmap,[https://www.woosmap.com/en,France,50-200,Unknown,Europe,Google](https://www.woosmap.com/en,France,50-200,Unknown,Europe,Google) Maps Integration Platform,Private
+Direct Competitor (SaaS Mapping),Living Map,[www.livingmap.com](https://www.livingmap.com),UK,11-50,$2M - $5M,UK / Global,Digital Mapping & Routing,Series A
+Direct Competitor (SaaS Mapping),Wemap,[https://getwemap.com/,France,11-50,$2M](https://getwemap.com/,France,11-50,$2M) - $5M,Europe,Smart Maps & AR,Private
+Direct Competitor (SaaS Mapping),Mapxus,[https://www.mapxus.com/,Hong](https://www.mapxus.com/,Hong) Kong,50-100,Unknown,APAC,Indoor Mapping Infrastructure,Series B
+Direct Competitor (Signage Platform),22Miles,[https://www.22miles.com/,USA,50-200,$25M](https://www.22miles.com/,USA,50-200,$25M) - $50M,Global / US,CMS + Wayfinding Module,Private
+Direct Competitor (Signage Platform),Poppulo (Four Winds),[https://www.poppulo.com/,USA](https://www.poppulo.com/,USA) / Ireland,500+,$100M+,Global,Enterprise Signage & Workplace,Private Equity
+Direct Competitor (Signage Platform),Korbyt,[https://www.korbyt.com/,USA,200-500,$50M+,Global,Workplace](https://www.korbyt.com/,USA,200-500,$50M+,Global,Workplace) Experience & Signage,Private
+Direct Competitor (Signage Platform),Navori Labs,[https://navori.com/,Switzerland,50-100,$10M+,Global](https://navori.com/,Switzerland,50-100,$10M+,Global) / MENA,Digital Signage Software (QL),Private
+Direct Competitor (Signage Platform),Mvix,[https://mvixdigitalsignage.com/,USA,11-50,$5M](https://mvixdigitalsignage.com/,USA,11-50,$5M) - $10M,North America,Signage CMS,Private
+Direct Competitor (Signage Platform),Hypersign,[https://www.hypersign.com/,USA,11-50](https://www.hypersign.com/,USA,11-50),<$5M,US / Education,Visual Communication,Public (OTC)
+Direct Competitor (Signage Platform),Signagelive,[https://signagelive.com/,UK,50-100,$5M](https://signagelive.com/,UK,50-100,$5M) - $10M,Global,Cloud Digital Signage CMS,Private
+Direct Competitor (Signage Platform),Broadsign,[https://broadsign.com/,Canada,200-500,$50M](https://broadsign.com/,Canada,200-500,$50M) - $100M,Global,DOOH & Wayfinding Ads,Private
+Direct Competitor (Signage Platform),ZetaDisplay,[https://zetadisplay.com/,Sweden,200-500,$40M](https://zetadisplay.com/,Sweden,200-500,$40M) - $50M,Europe,Digital Signage Integrator,Public (Nasdaq Stockholm)
+Direct Competitor (Signage Platform),Omnivex,[https://www.omnivex.com/,Canada,50-100,$10M+,North](https://www.omnivex.com/,Canada,50-100,$10M+,North) America,Data-Driven Digital Signage,Private
+Direct Competitor (Signage Platform),Intuiface,[https://www.intuiface.com/,France,11-50,$2M](https://www.intuiface.com/,France,11-50,$2M) - $5M,Global,No-Code Interactive Kiosk Software,Private
+Direct Competitor (Signage Platform),Stratacache,[https://www.stratacache.com/,USA,500+,$1B](https://www.stratacache.com/,USA,500+,$1B)+ (Group),Global,End-to-End Digital Media Tech,Private
+Direct Competitor (Signage Platform),Scala,[https://www.scala.com/,USA,200-500,$50M](https://www.scala.com/,USA,200-500,$50M)+ (Est),Global,Digital Signage & Marketing Tech,Acquired by Stratacache
+Competitor (Indoor Positioning),Pointr,www.pointr.tech,UK,50-100,$5M+,Global,Deep Location / Blue Dot,Series A
+Competitor (Indoor Positioning),IndoorAtlas,[https://www.indooratlas.com/,Finland,11-50,$2M](https://www.indooratlas.com/,Finland,11-50,$2M) - $5M,Global,Geomagnetic Positioning (IPS),Series B
+Competitor (Indoor Positioning),Situm,[www.situm.com](https://www.situm.com),Spain,11-50,$1M - $5M,Europe,Indoor Positioning,Private
+Competitor (Indoor Positioning),Navenio,[https://navenio.com/,UK,50-100,$5M](https://navenio.com/,UK,50-100,$5M) - $10M,UK / US,Infrastructure-free Tracking,Series A
+Competitor (Indoor Positioning),Pole Star,[https://www.polestar.eu/,France,50-100,$5M+,Europe,Indoor](https://www.polestar.eu/,France,50-100,$5M+,Europe,Indoor) Positioning,Private
+Competitor (Indoor Positioning),Navigine,[https://navigine.com/,USA/Germany,11-50,$2M](https://navigine.com/,USA/Germany,11-50,$2M) - $5M,Global,Indoor Positioning Platform,Private
+Competitor (Indoor Positioning),Nextome,[https://www.nextome.com/,Italy,11-50,$1M](https://www.nextome.com/,Italy,11-50,$1M) - $3M,Europe,Indoor Localization & Tracking,Private
+Competitor (Indoor Positioning),Favendo,[https://www.favendo.com/,Germany,11-50,$2M](https://www.favendo.com/,Germany,11-50,$2M) - $5M,Europe,RTLS & Wayfinding,Private
+Competitor (Indoor Positioning),Insiteo,[https://www.insiteo.com/,France,11-50,$1M](https://www.insiteo.com/,France,11-50,$1M) - $3M,Europe,Indoor Location Services,Private
+Competitor (Indoor Positioning),Mapsted,[https://mapsted.com/,Canada,50-100,Unknown,Global,Hardware-Free](https://mapsted.com/,Canada,50-100,Unknown,Global,Hardware-Free) Indoor Navigation,Unfunded
+Competitor (Indoor Positioning),Quuppa,[https://www.quuppa.com/,Finland,50-200,$10M](https://www.quuppa.com/,Finland,50-200,$10M) - $20M,Global,High-Accuracy BLE Tracking,Series A ($23M)
+Competitor (Indoor Positioning),Inpixon,[https://www.inpixon.com/,USA,50-100,$10M](https://www.inpixon.com/,USA,50-100,$10M) - $15M,Global,Indoor Intelligence & Security,Public (Merged XTI)
+Competitor (Regional - MENA),Transit Security Solutions,[https://transit-si.com/,UAE,50-200,Unknown,UAE](https://transit-si.com/,UAE,50-200,Unknown,UAE) / GCC,System Integrator / Digital Signage,Private
+Competitor (Regional - MENA),ProSigns,[https://professional-signs.com/,Saudi](https://professional-signs.com/,Saudi) Arabia,50-200,Unknown,Saudi Arabia,Digital Signage / Wayfinding,Private
+Competitor (Regional - MENA),PearlQuest,[https://pearlquest.ae/,UAE,11-50,Unknown,UAE,Interactive](https://pearlquest.ae/,UAE,11-50,Unknown,UAE,Interactive) Solutions / Kiosks,Private
+Competitor (Regional - MENA),AVM Creatives,[https://avmcreatives.com/,UAE,11-50,Unknown,UAE,Wayfinding](https://avmcreatives.com/,UAE,11-50,Unknown,UAE,Wayfinding) Design & Software,Private
+Competitor (Regional - MENA),Click Grafix,[https://www.clickgrafix.com/,Malaysia](https://www.clickgrafix.com/,Malaysia) / Dubai,11-50,Unknown,MENA / Asia,Digital Signage Distributor (Scala),Private
+Competitor (Regional - MENA),Joseph Group,[https://josephgroup.com/,UAE,200-500,Unknown,MENA,Signage](https://josephgroup.com/,UAE,200-500,Unknown,MENA,Signage) Manufacturing & Wayfinding,Private
+Competitor (Regional - MENA),Blue Rhine,[https://bluerhine.com/,UAE,100-200,Unknown,MENA,Signage](https://bluerhine.com/,UAE,100-200,Unknown,MENA,Signage) Materials & Screens,Private
+Competitor (Regional - MENA),Desert River,[https://www.desertriver.com/,UAE,11-50,Unknown,MENA,Events](https://www.desertriver.com/,UAE,11-50,Unknown,MENA,Events) & Interactive Furniture/Screens,Private
+Competitor (Regional - APAC/Others),elTOV,[https://tov.com.sg/,Korea](https://tov.com.sg/,Korea) / Singapore,50-100,Unknown,APAC,Kiosk Wayfinding,Private
+Competitor (Regional - APAC/Others),Ascend Com,[http://ascendcom.com.sg/,Singapore,11-50,Unknown,APAC,Interactive](http://ascendcom.com.sg/,Singapore,11-50,Unknown,APAC,Interactive) Media,Private
+Competitor (Specialist/Niche),NaviLens,[www.navilens.com](https://www.navilens.com),Spain,11-50,<$5M,Global,Accessibility / QR Codes,Private
+Competitor (Specialist/Niche),InMapz,[https://inmapz.com/,USA,11-50,Unknown,North](https://inmapz.com/,USA,11-50,Unknown,North) America,Smart Mall Solutions,Private
+Competitor (Specialist/Niche),MagicPlan,[https://www.magicplan.app/,Germany/Canada,11-50,Unknown,Global,Floor](https://www.magicplan.app/,Germany/Canada,11-50,Unknown,Global,Floor) Plan Creation (AR),Private
+Competitor (Specialist/Niche),PAM,[https://pam.co/,Australia/USA,11-50,Unknown,Global,Smart](https://pam.co/,Australia/USA,11-50,Unknown,Global,Smart) Navigation Platform,Private
+Competitor (Specialist/Niche),Connexient (Everbridge),[https://www.everbridge.com/products/digital-wayfinding/,USA,50-200,Acquired](https://www.everbridge.com/products/digital-wayfinding/,USA,50-200,Acquired) ($20M),US / Healthcare,Healthcare Wayfinding,Acquired by Everbridge
+Competitor (Specialist/Niche),Proximi.io,[https://proximi.io/,Finland,11-50](https://proximi.io/,Finland,11-50),<$5M,Global,Unified Positioning Platform,Seed

@@ -1,0 +1,58 @@
+model Competitor {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  website     String?
+  description String?
+  industry    String?
+  region      String?
+  headquarters  String?
+  employeeCount String?
+  revenue       String?
+  fundingStatus String?
+  keyMarkets    String?
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  news        CompetitorNews[]
+}
+
+model CompetitorNews {
+  id            String     @id @default(cuid())
+  competitorId  String
+  competitor    Competitor @relation(fields: [competitorId], references: [id], onDelete: Cascade)
+  eventType     String
+  date          DateTime
+  title         String
+  summary       String
+  threatLevel   Int
+  region        String?    // "North America" | "Europe" | "MENA" | "APAC" | "South America" | "Global"
+  details       String     // JSON string with location, financial_value, partners, products
+  sourceUrl     String     @unique
+  isRead        Boolean    @default(false)
+  isStarred     Boolean    @default(false)
+  extractedAt   DateTime   @default(now())
+
+  @@index([competitorId, date])
+  @@index([eventType])
+  @@index([threatLevel])
+  @@index([isRead])
+}
+
+model Debrief {
+  id          String   @id @default(cuid())
+  content     String
+  periodStart DateTime
+  periodEnd   DateTime
+  itemCount   Int
+  generatedAt DateTime @default(now())
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}

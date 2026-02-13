@@ -1,0 +1,52 @@
+{
+  "name": "abuzz_newsletter_app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "lint": "eslint",
+    "postinstall": "prisma generate",
+    "vercel-build": "prisma generate && next build"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.72.1",
+    "@google/generative-ai": "^0.24.1",
+    "@prisma/client": "^5.21.0",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@types/d3-scale": "^4.0.9",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "csv-parse": "^6.1.0",
+    "d3-scale": "^4.0.2",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.562.0",
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^10.1.0",
+    "react-simple-maps": "^3.0.0",
+    "react-tooltip": "^5.30.0",
+    "remark-gfm": "^4.0.1",
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@types/react-simple-maps": "^3.0.6",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.15",
+    "postcss": "^8.4.38",
+    "prisma": "^5.21.0",
+    "tailwindcss": "^3.4.1",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  }
+}

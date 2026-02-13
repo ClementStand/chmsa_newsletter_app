@@ -1,0 +1,19 @@
+============================================================
+🎯 ABUZZ COMPETITOR INTELLIGENCE FETCHER
+   Powered by Serper.dev + Claude AI
+============================================================
+Traceback (most recent call last):
+  File "/Users/clementstandaert/Desktop/abuzz_newsletter_app/scripts/news_fetcher.py", line 564, in <module>
+    fetch_all_news(clean_start=args.clean, regions=regions)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/clementstandaert/Desktop/abuzz_newsletter_app/scripts/news_fetcher.py", line 497, in fetch_all_news
+    competitors = get_competitors()
+  File "/Users/clementstandaert/Desktop/abuzz_newsletter_app/scripts/news_fetcher.py", line 129, in get_competitors
+    conn = get_db_connection()
+  File "/Users/clementstandaert/Desktop/abuzz_newsletter_app/scripts/news_fetcher.py", line 124, in get_db_connection
+    return psycopg2.connect(DATABASE_URL, cursor_factory=RealDictCursor)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/clementstandaert/Desktop/abuzz_newsletter_app/.venv/lib/python3.14/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "db.ftlprayhudokuheukwcn.supabase.co" to address: nodename nor servname provided, or not known
+
