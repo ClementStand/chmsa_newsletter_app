@@ -37,27 +37,68 @@ PRIORITY_COMPETITORS = [
 # Regional search configurations
 REGIONS = {
     'global': {'gl': 'us', 'hl': 'en'},
-    'brazil': {'gl': 'br', 'hl': 'pt'},  # Brazil (primary market)
+    'brazil_pt': {'gl': 'br', 'hl': 'pt'},  # Brazil in Portuguese
+    'brazil_en': {'gl': 'br', 'hl': 'en'},  # Brazil in English
     'europe': {'gl': 'es', 'hl': 'es'},  # Spain (Fagor HQ)
     'latam': {'gl': 'mx', 'hl': 'es'},  # Mexico / Latin America
 }
 
+# URLs that indicate non-news content (product pages, sales, profiles)
+BLOCKED_URL_PATTERNS = [
+    'linkedin.com', 'crunchbase.com', 'facebook.com', 'instagram.com',
+    'youtube.com', 'twitter.com', 'x.com',
+    '/product', '/products', '/catalog', '/catalogo',
+    '/shop', '/store', '/loja', '/tienda',
+    '/contact', '/contato', '/about', '/sobre',
+    'mercadolivre', 'mercadolibre', 'amazon.com', 'alibaba.com',
+    'olx.com', 'ebay.com',
+    'glassdoor.com', 'indeed.com', 'ziprecruiter.com',
+    'wikipedia.org', 'dnb.com', 'zoominfo.com',
+    '/careers', '/vagas', '/empleo',
+]
+
+
+def is_news_url(url):
+    """Filter out product pages, sales sites, social media, and company profiles"""
+    if not url:
+        return False
+    url_lower = url.lower()
+    for pattern in BLOCKED_URL_PATTERNS:
+        if pattern in url_lower:
+            return False
+    return True
+
+
 ANALYSIS_PROMPT = """You are a competitive intelligence analyst for CIMHSA, a company that manufactures and sells CNC machine tools, industrial machinery, and automation solutions.
 
-I found these news articles about {competitor_name}:
+I found these search results about {competitor_name}:
 
 {articles}
 
-Based on these articles, identify any news related to:
-- CNC machine tools, lathes, milling machines
-- Industrial automation, Industry 4.0
-- Plastic processing machines, injection molding
-- Manufacturing technology, metalworking
-- Partnerships, funding, acquisitions
-- Product launches, expansions
-- Trade shows, exhibitions (e.g. FEIMEC, EMO, JIMTOF)
+IMPORTANT: Articles may be in Portuguese, Spanish, or English. Analyze ALL articles regardless of language. Always output your title and summary in ENGLISH, even if the source article is in another language.
 
-If there's genuinely no relevant news, respond with: {{"no_relevant_news": true}}
+Your job is to find REAL NEWS EVENTS only. Include:
+- New contracts, deals, project wins
+- Partnerships, acquisitions, mergers, joint ventures
+- Product launches, new machine models, technology announcements
+- Trade show appearances with NEW products or announcements
+- Financial results, earnings reports, revenue milestones
+- New factory openings, facility expansions
+- Leadership changes, executive appointments
+- Awards, certifications, recognitions
+- Market expansion into new countries or regions
+- Funding rounds, IPO news, investment news
+
+STRICTLY EXCLUDE (these are NOT news):
+- Product catalog pages or sales listings
+- Generic company profile descriptions ("Company X sells machines...")
+- Job postings or career pages
+- Social media posts without real news content
+- "About us" or company overview pages
+- Price lists or quotation pages
+- Old press releases just being re-indexed
+
+If NONE of the articles contain real news events, respond with: {{"no_relevant_news": true}}
 
 Otherwise, return JSON:
 
@@ -65,8 +106,8 @@ Otherwise, return JSON:
   "news_items": [
     {{
       "event_type": "New Project/Installation" | "Investment/Funding Round" | "Award/Recognition" | "Product Launch" | "Partnership/Acquisition" | "Leadership Change" | "Market Expansion" | "Technical Innovation" | "Financial Performance",
-      "title": "Clear headline (max 100 chars)",
-      "summary": "2-3 sentence summary (max 500 chars)",
+      "title": "Clear headline in ENGLISH (max 100 chars)",
+      "summary": "2-3 sentence summary in ENGLISH (max 500 chars). Must describe a specific event, not a general company description.",
       "threat_level": 1-5,
       "date": "YYYY-MM-DD",
       "source_url": "The actual URL from the article",
@@ -192,7 +233,7 @@ def save_news_item(competitor_id, news_item):
         
         date_str = news_item.get('date', now.strftime('%Y-%m-%d'))
         try:
-            news_date = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+            news_date = datetime.datetime.strptime(date_str, '%Y-%m-%d').replace(tzinfo=datetime.timezone.utc)
         except:
             news_date = now
 
@@ -200,11 +241,11 @@ def save_news_item(competitor_id, news_item):
         if news_date > now:
             news_date = now
 
-        # Skip news before 2025
-        cutoff = datetime.datetime(2025, 1, 1, tzinfo=datetime.timezone.utc)
+        # Skip news before 2024
+        cutoff = datetime.datetime(2024, 1, 1, tzinfo=datetime.timezone.utc)
         if news_date < cutoff:
             conn.close()
-            return False, "pre_2025"
+            return False, "pre_2024"
 
         news_date_str = news_date.strftime('%Y-%m-%dT%H:%M:%S.000Z')
         
@@ -321,52 +362,57 @@ def search_serper(query, search_type='news', region='global', num_results=10, da
         return []
 
 
-def search_news(competitor_name, regions_to_search=['global', 'brazil', 'europe'], date_restrict=None):
+def search_news(competitor_name, regions_to_search=['global', 'brazil_pt', 'brazil_en', 'europe'], date_restrict=None):
     """
-    Search for news about a competitor across multiple regions
+    Search for news about a competitor across multiple regions and languages.
+    Focuses on actual news sources, not product/sales pages.
     date_restrict: e.g. 'd3' for last 3 days, 'w1' for last week
     """
     all_results = []
     seen_urls = set()
+    filtered_count = 0
     
-    # Build search queries
+    # News-focused search queries in English, Portuguese, and Spanish
     queries = [
-        f'"{competitor_name}" news',
-        f'{competitor_name} CNC OR "machine tool" OR machinery OR automation',
+        # English — news-focused
+        f'"{competitor_name}" announcement OR launch OR partnership OR expansion OR acquisition',
+        f'"{competitor_name}" revenue OR earnings OR "new contract" OR award',
+        # Portuguese — news-focused
+        f'"{competitor_name}" lan\u00e7amento OR parceria OR expans\u00e3o OR aquisi\u00e7\u00e3o OR faturamento',
+        f'"{competitor_name}" not\u00edcia OR feira OR FEIMEC OR Expomafe',
+        # Spanish — news-focused
+        f'"{competitor_name}" lanzamiento OR asociaci\u00f3n OR expansi\u00f3n OR adquisici\u00f3n',
     ]
     
     for region in regions_to_search:
         for query in queries:
-            results = search_serper(query, search_type='news', region=region, num_results=5, date_restrict=date_restrict)
+            # Use NEWS search type only — this avoids product pages
+            results = search_serper(query, search_type='news', region=region, num_results=10, date_restrict=date_restrict)
             
             for r in results:
                 url = r.get('link', '')
                 if url and url not in seen_urls:
                     seen_urls.add(url)
-                    r['_search_region'] = region  # Track which region found this
-                    all_results.append(r)
+                    if is_news_url(url):
+                        r['_search_region'] = region
+                        all_results.append(r)
+                    else:
+                        filtered_count += 1
             
-            # Also try regular search for more coverage
-            results = search_serper(query, search_type='search', region=region, num_results=5, date_restrict=date_restrict)
-            
-            for r in results:
-                url = r.get('link', '')
-                if url and url not in seen_urls:
-                    seen_urls.add(url)
-                    r['_search_region'] = region
-                    all_results.append(r)
-            
-            if len(all_results) >= 15:
+            if len(all_results) >= 25:
                 break
         
-        if len(all_results) >= 15:
+        if len(all_results) >= 25:
             break
     
-    return all_results[:15]
+    if filtered_count > 0:
+        print(f" ({filtered_count} non-news URLs filtered)", end="")
+    
+    return all_results[:25]
 
 
 def analyze_with_claude(competitor_name, articles):
-    """Send articles to Claude for analysis"""
+    """Send articles to Claude for analysis, batching if needed"""
     if not articles:
         return None
     
@@ -374,15 +420,27 @@ def analyze_with_claude(competitor_name, articles):
         print("      ERROR: ANTHROPIC_API_KEY not set in .env")
         return None
     
-    articles_text = ""
-    for i, article in enumerate(articles, 1):
-        title = sanitize_text(article.get('title', 'No title'))
-        snippet = sanitize_text(article.get('snippet', article.get('description', '')))
-        url = article.get('link', article.get('url', ''))
-        date = article.get('date', 'Unknown')
-        region = article.get('_search_region', 'global').upper()
+    # Batch articles to avoid overwhelming Claude (max 12 per batch)
+    BATCH_SIZE = 12
+    all_news_items = []
+    
+    for batch_start in range(0, len(articles), BATCH_SIZE):
+        batch = articles[batch_start:batch_start + BATCH_SIZE]
+        batch_num = (batch_start // BATCH_SIZE) + 1
+        total_batches = (len(articles) + BATCH_SIZE - 1) // BATCH_SIZE
         
-        articles_text += f"""
+        if total_batches > 1:
+            print(f"      [batch {batch_num}/{total_batches}]", end="")
+        
+        articles_text = ""
+        for i, article in enumerate(batch, 1):
+            title = sanitize_text(article.get('title', 'No title'))
+            snippet = sanitize_text(article.get('snippet', article.get('description', '')))
+            url = article.get('link', article.get('url', ''))
+            date = article.get('date', 'Unknown')
+            region = article.get('_search_region', 'global').upper()
+            
+            articles_text += f"""
 ---
 Article {i}:
 Title: {title}
@@ -392,44 +450,76 @@ Region Found: {region}
 Content: {snippet[:500]}
 ---
 """
-    
-    prompt = ANALYSIS_PROMPT.format(
-        competitor_name=competitor_name,
-        articles=articles_text
-    )
-    
-    try:
-        message = client.messages.create(
-            model="claude-3-haiku-20240307",
-            max_tokens=4000,
-            messages=[
-                {"role": "user", "content": prompt}
-            ]
+        
+        prompt = ANALYSIS_PROMPT.format(
+            competitor_name=competitor_name,
+            articles=articles_text
         )
         
-        response_text = message.content[0].text.strip()
+        try:
+            message = client.messages.create(
+                model="claude-3-haiku-20240307",
+                max_tokens=4000,
+                messages=[
+                    {"role": "user", "content": prompt}
+                ]
+            )
+            
+            response_text = message.content[0].text.strip()
+            
+            # Clean JSON if wrapped in markdown
+            if "```json" in response_text:
+                response_text = response_text.split("```json")[1].split("```")[0]
+            elif "```" in response_text:
+                response_text = response_text.split("```")[1].split("```")[0]
+            
+            response_text = response_text.strip()
+            
+            # Try to fix truncated JSON
+            result = None
+            try:
+                result = json.loads(response_text)
+            except json.JSONDecodeError:
+                # Attempt recovery: try adding closing brackets
+                for fix in ['}]}', ']}', '}']:
+                    try:
+                        result = json.loads(response_text + fix)
+                        print(" (recovered truncated JSON)", end="")
+                        break
+                    except json.JSONDecodeError:
+                        continue
+            
+            if result is None:
+                print(f" JSON parse failed, skipping batch")
+                continue
+            
+            if not result.get('no_relevant_news'):
+                batch_items = result.get('news_items', [])
+                all_news_items.extend(batch_items)
+                if total_batches > 1:
+                    print(f" → {len(batch_items)} items")
+            else:
+                if total_batches > 1:
+                    print(f" → no relevant news")
+                
+        except anthropic.APIError as e:
+            print(f"\n      Claude API error: {e}")
+            continue
+        except Exception as e:
+            print(f"\n      Error: {e}")
+            continue
         
-        # Clean JSON if wrapped in markdown
-        if "```json" in response_text:
-            response_text = response_text.split("```json")[1].split("```")[0]
-        elif "```" in response_text:
-            response_text = response_text.split("```")[1].split("```")[0]
-        
-        result = json.loads(response_text.strip())
-        return result
-        
-    except json.JSONDecodeError as e:
-        print(f"      JSON error: {e}")
-        return None
-    except anthropic.APIError as e:
-        print(f"      Claude API error: {e}")
-        return None
-    except Exception as e:
-        print(f"      Error: {e}")
-        return None
+        # Small delay between batches
+        if batch_start + BATCH_SIZE < len(articles):
+            time.sleep(0.5)
+    
+    if not all_news_items:
+        return {'no_relevant_news': True}
+    
+    return {'news_items': all_news_items}
 
 
-def fetch_news_for_competitor(competitor, regions=['global', 'brazil', 'europe'], existing_urls=None, date_restrict=None):
+def fetch_news_for_competitor(competitor, regions=['global', 'brazil_pt', 'brazil_en', 'europe'], existing_urls=None, date_restrict=None):
     """Fetch and analyze news for one competitor"""
     comp_id = competitor['id']
     name = competitor['name']
@@ -476,6 +566,8 @@ def fetch_news_for_competitor(competitor, regions=['global', 'brazil', 'europe']
             print(f"      ✅ [{region}] {item.get('title', '')[:50]}...")
         elif status == "duplicate":
             print(f"      ⏭️  Duplicate: {item.get('title', '')[:40]}...")
+        elif status == "pre_2024":
+            print(f"      📅 Too old ({item.get('date', '?')}): {item.get('title', '')[:40]}...")
     
     return saved
 
@@ -527,7 +619,7 @@ def clear_all_news():
     return deleted
 
 
-def fetch_all_news(limit=None, clean_start=False, regions=['global', 'brazil', 'europe'], days=None):
+def fetch_all_news(limit=None, clean_start=False, regions=['global', 'brazil_pt', 'brazil_en', 'europe'], days=None):
     """Main function
     days: Only search for articles from the last N days. If None, auto-detects from last fetch.
     """
@@ -628,7 +720,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     # Determine regions to search
-    regions = ['global', 'brazil', 'europe']
+    regions = ['global', 'brazil_pt', 'brazil_en', 'europe']
     if args.region:
         regions = [args.region]
     elif args.mena:
