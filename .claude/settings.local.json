@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node /tmp/test-chat2.js:*)"
+      "Bash(node /tmp/test-chat2.js:*)",
+      "Bash(python3:*)"
     ]
   }
 }

@@ -1,0 +1,2 @@
+./.venv/bin/python scripts/news_fetcher.py
+./.venv/bin/python scripts/debrief_generator.py

@@ -575,7 +575,7 @@ def fetch_news_for_competitor(competitor, regions=['global', 'brazil_pt', 'brazi
 def write_status(status, current_competitor=None, processed=0, total=0, error=None):
     """Write progress status to JSON file for Next.js API to read"""
     import time
-    from datetime import datetime
+    from datetime import datetime, timezone
 
     # Calculate progress
     percent_complete = 0
@@ -592,8 +592,8 @@ def write_status(status, current_competitor=None, processed=0, total=0, error=No
         'total': total,
         'percent_complete': percent_complete,
         'estimated_seconds_remaining': estimated_seconds_remaining,
-        'started_at': datetime.utcnow().isoformat() + 'Z' if status == 'running' and processed == 0 else None,
-        'completed_at': datetime.utcnow().isoformat() + 'Z' if status == 'completed' else None,
+        'started_at': datetime.now(timezone.utc).isoformat() if status == 'running' and processed == 0 else None,
+        'completed_at': datetime.now(timezone.utc).isoformat() if status == 'completed' else None,
         'error': error
     }
 
@@ -638,11 +638,18 @@ def fetch_all_news(limit=None, clean_start=False, regions=['global', 'brazil_pt'
         deleted = clear_all_news()
         print(f"\n🧹 Cleared {deleted} news entries")
 
+    def _days_to_tbs(n):
+        """Convert a number of days to a valid Serper tbs value (qdr:d/w/m/y)."""
+        if n <= 1:   return 'd'
+        if n <= 7:   return 'w'
+        if n <= 30:  return 'm'
+        return 'y'   # Serper max granularity is one year; >365 days → no restriction below
+
     # Determine date restriction for Serper searches
     date_restrict = None
     if days:
-        date_restrict = f"d{days}"
-        print(f"\n📅 Searching last {days} day(s) only")
+        date_restrict = _days_to_tbs(days)
+        print(f"\n📅 Searching last {days} day(s) (tbs=qdr:{date_restrict})")
     elif not clean_start:
         # Auto-detect: calculate days since last fetch
         last_fetch = get_last_fetch_date()
@@ -652,7 +659,7 @@ def fetch_all_news(limit=None, clean_start=False, regions=['global', 'brazil_pt'
             days_since = (datetime.datetime.now(datetime.timezone.utc) - last_fetch).days
             search_days = max(days_since + 1, 1)  # At least 1 day, +1 for overlap
             search_days = min(search_days, 14)  # Cap at 2 weeks
-            date_restrict = f"d{search_days}"
+            date_restrict = _days_to_tbs(search_days)
             print(f"\n📅 Last fetch: {last_fetch.strftime('%b %d, %Y')} — searching last {search_days} day(s)")
         else:
             print(f"\n📅 First run — searching all available articles")

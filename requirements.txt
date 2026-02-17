@@ -2,3 +2,5 @@ psycopg2-binary
 anthropic
 python-dotenv
 requests
+google-genai
+httpx
