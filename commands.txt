@@ -1,2 +1,1 @@
-./.venv/bin/python scripts/news_fetcher.py
-./.venv/bin/python scripts/debrief_generator.py
+./.venv/bin/python scripts/fetch_feeds.py --days 420

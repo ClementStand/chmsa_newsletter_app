@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "NavPro Intel",
   description: "Daily Competitor Intelligence",
   icons: {
-    icon: "/logo.png",
+    icon: "/icon.png",
   },
 };
 
