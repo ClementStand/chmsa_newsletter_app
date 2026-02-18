@@ -4,7 +4,7 @@ import NewsFeed from '../components/NewsFeed'
 import ThreatFilter from '../components/ThreatFilter'
 import { RightSidebar } from '../components/RightSidebar'
 import SurveillanceMap from '../components/SurveillanceMap'
-import { DashboardRefreshButton } from '../components/ui/DashboardRefreshButton'
+
 import { subHours, subDays } from 'date-fns'
 
 export default async function Home({
@@ -116,10 +116,10 @@ export default async function Home({
                 </p>
               </div>
 
-              {/* Refresh Button */}
-              <div className="relative z-10 w-64">
-                <DashboardRefreshButton />
-              </div>
+              {/* Refresh Button - Removed as per request */}
+              {/* <div className="relative z-10 w-64">
+                  <DashboardRefreshButton />
+                </div> */}
             </div>
 
             {/* ✅ Passing the server-fetched news to the component */}
